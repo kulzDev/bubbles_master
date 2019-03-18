@@ -13,7 +13,10 @@
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></View>
+        app:layout_constraintTop_toTopOf="parent">
+
+
+    </View>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_user_photo"
@@ -24,32 +27,66 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:src="@mipmap/ic_launcher_round"
-        app:civ_border_width="2dp"
         app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134"
-        />
+        app:layout_constraintVertical_bias="0.134" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_left_arrow"
+        app:layout_constraintBottom_toTopOf="@+id/profile_user_photo"
+        app:layout_constraintEnd_toStartOf="@+id/profile"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/editIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_notification"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="2dp"
+        app:civ_circle_background_color="@color/colorPrimary"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/profile_user_photo">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
 
     <TextView
         android:id="@+id/profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="174dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:textSize="34dp"
-        android:text="Profile"
+        android:text="Edit Account"
         android:textColor="@android:color/white"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.638"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.255" />
 
     <TextView
         android:id="@+id/profile_displayName"
@@ -82,187 +119,76 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="52dp" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="283dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="12dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@+id/update_fullname3" />
-
-    <TextView
-        android:id="@+id/txtPersonaInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
-        android:text="Personal Information"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <TextView
-        android:id="@+id/txtPersonaInfo2"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:text="Payment Methods"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
-
-    <TextView
-        android:id="@+id/update_fullname3"
-        android:layout_width="64dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="8dp"
-        android:text="Full Name"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.017"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/txtPersonaInfo" />
-
-    <TextView
-        android:id="@+id/update_fullname2"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Mobile Numbers"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.021"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="283dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName|phone"
-        android:text="Name"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/update_fullname2" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        android:background="@drawable/textfield_bg"
-        android:paddingStart="10dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="10dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/txtPersonaInfo2">
+        app:layout_constraintTop_toBottomOf="@+id/profile_displayName">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:errorEnabled="true">
 
-            <RelativeLayout
-                android:layout_width="280dp"
-                android:layout_height="match_parent">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/txtProfileFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Names"
+                android:inputType="text" />
 
-                <ImageView
-                    android:id="@+id/payment_cash_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_appointments" />
+        </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="55dp"
-                    android:layout_toRightOf="@+id/payment_cash_icon"
-                    android:text="Cash" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/txtProfileEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
 
-            <RelativeLayout
-                android:layout_width="280dp"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/payment_creditCard_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_appointments" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="55dp"
-                    android:layout_toRightOf="@+id/payment_creditCard_icon"
-                    android:text="Cash" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="280dp"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/payment_paypal_icon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_appointments" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="55dp"
-                    android:layout_toRightOf="@+id/payment_paypal_icon"
-                    android:text="Cash" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" />
-            </RelativeLayout>
+        </android.support.design.widget.TextInputLayout>
 
 
-        </LinearLayout>
 
-    </RadioGroup>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
+            app:errorEnabled="true">
 
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/txtProfilePhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Numbers"
+                android:inputType="phone" />
 
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnUpdateProfile"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_bg"
+            android:text="@string/update_profile"
+            android:textColor="@color/icons"
+            android:textSize="18sp"
+           />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

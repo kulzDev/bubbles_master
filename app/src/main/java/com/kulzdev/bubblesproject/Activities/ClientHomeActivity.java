@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,13 +42,16 @@ import com.kulzdev.bubblesproject.Adapters.ServicesRecyclerViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ClientHomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private TextView mTextMessage,mDisplayName;
     private FirebaseAuth mAuth;
     private User findUser;
     private FirebaseUser currentUser;
+    private CircleImageView mUserPhoto;
 
 
 
@@ -80,12 +85,11 @@ public class ClientHomeActivity extends AppCompatActivity
         currentUser = mAuth.getCurrentUser();
 
         mDisplayName = (TextView)findViewById(R.id.nav_displayName);
-       // mTextMessage = (TextView)findViewById(R.id.txtMessage);
+        mUserPhoto =  findViewById(R.id.nav_user_photo);
 
+        Log.d("Image",mUserPhoto +"");
+        //mUserPhoto.setOnClickListener(this);
 
-        //find a user by ID.
-
-        //mTextMessage.setText("Welcome User " + mAuth.getCurrentUser().getUid());
 
         Query findUser = FirebaseDatabase.getInstance().getReference("users")
                 .orderByChild("id")
@@ -120,6 +124,9 @@ public class ClientHomeActivity extends AppCompatActivity
         intializedata();
         initializeAdapter();
 
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
 
     }
 
@@ -148,10 +155,10 @@ public class ClientHomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+      /*  if (id == R.id.action_settings) {
             return true;
         }
-
+*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -190,7 +197,7 @@ public class ClientHomeActivity extends AppCompatActivity
                     //mTextMessage.setText("Welcome " + findUser.getFullName());
                     //mDisplayName.setText(findUser.getFullName());
 
-                    updateNavHeader();
+                    updateNavHeader(findUser);
 
                 }
 
@@ -211,7 +218,7 @@ public class ClientHomeActivity extends AppCompatActivity
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
-    public void updateNavHeader(){
+    public void updateNavHeader(User user){
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
@@ -220,7 +227,7 @@ public class ClientHomeActivity extends AppCompatActivity
         //Update the profile image here also
         ImageView nav_profile_image = findViewById(R.id.nav_user_photo);
 
-        navDisplayName.setText(currentUser.getDisplayName());
+        navDisplayName.setText(user.getFullName());
 
         //currentUser.up
 
@@ -262,6 +269,19 @@ private void intializedata(){
 
 
     }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+
+        switch (id){
+            case R.id.nav_user_photo:
+                Intent i = new Intent(this, ClientProfileActivity.class);
+                startActivity(i);
+                break;
+        }
+    }
+
     //class for the AdapterViewFlipper
     class FlipperAdapter extends BaseAdapter {
         Context ctx;
@@ -318,6 +338,27 @@ private void intializedata(){
         startActivity(i);
 
     }
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_home:
+                    mTextMessage.setText(R.string.title_home);
+                    return true;
+                case R.id.navigation_dashboard:
+                    mTextMessage.setText(R.string.title_dashboard);
+                    return true;
+                case R.id.navigation_notifications:
+                    mTextMessage.setText(R.string.title_notifications);
+                    return true;
+            }
+            return false;
+        }
+    };
 
 
 }
