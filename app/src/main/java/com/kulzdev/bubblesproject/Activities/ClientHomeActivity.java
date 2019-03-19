@@ -52,6 +52,7 @@ public class ClientHomeActivity extends AppCompatActivity
     private User findUser;
     private FirebaseUser currentUser;
     private CircleImageView mUserPhoto;
+    private Query dbUser;
 
 
 
@@ -84,14 +85,8 @@ public class ClientHomeActivity extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        mDisplayName = (TextView)findViewById(R.id.nav_displayName);
-        mUserPhoto =  findViewById(R.id.nav_user_photo);
 
-        Log.d("Image",mUserPhoto +"");
-        //mUserPhoto.setOnClickListener(this);
-
-
-        Query findUser = FirebaseDatabase.getInstance().getReference("users")
+        dbUser = FirebaseDatabase.getInstance().getReference("users")
                 .orderByChild("id")
                 .equalTo(mAuth.getCurrentUser().getUid());
 
@@ -107,7 +102,7 @@ public class ClientHomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        findUser.addValueEventListener(findUsersByID);
+        dbUser.addValueEventListener(findUsersByID);
 
 
         //Diplaying the output
@@ -128,6 +123,14 @@ public class ClientHomeActivity extends AppCompatActivity
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
+    }
+
+    @Override
+    protected void onRestart() {
+
+        dbUser.addValueEventListener(findUsersByID);
+
+        super.onRestart();
     }
 
     @Override
@@ -194,9 +197,6 @@ public class ClientHomeActivity extends AppCompatActivity
                 for(DataSnapshot dataSnap : dataSnapshot.getChildren()){
                     findUser = dataSnap.getValue(User.class);
 
-                    //mTextMessage.setText("Welcome " + findUser.getFullName());
-                    //mDisplayName.setText(findUser.getFullName());
-
                     updateNavHeader(findUser);
 
                 }
@@ -231,9 +231,10 @@ public class ClientHomeActivity extends AppCompatActivity
 
         //currentUser.up
 
+        nav_profile_image.setOnClickListener(this);
+
 
         //use Glide to load user image
-        //Toast.makeText(getApplicationContext(),"" + currentUser.getPhotoUrl(), Toast.LENGTH_LONG).show();
 
         if( currentUser.getPhotoUrl() != null){
              Glide.with(this).load(currentUser.getPhotoUrl()).into(nav_profile_image);
@@ -273,6 +274,7 @@ private void intializedata(){
     @Override
     public void onClick(View v) {
         int id = v.getId();
+
 
         switch (id){
             case R.id.nav_user_photo:

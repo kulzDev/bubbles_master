@@ -5,6 +5,7 @@ public class User {
     private String fullName;
     private String email;
     private String clientType;
+    private String mPhoneNumber;
     private String id;
 
 
@@ -51,4 +52,13 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getPhoneNumber() {
+        return mPhoneNumber;
+    }
+
+    public void setPhoneNumber(String mPhoneNumber) {
+        this.mPhoneNumber = mPhoneNumber;
+    }
+
 }
