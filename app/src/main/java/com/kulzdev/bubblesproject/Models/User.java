@@ -6,6 +6,7 @@ public class User {
     private String email;
     private String clientType;
     private String mPhoneNumber;
+    private String mProfileImage;
     private String id;
 
 
@@ -17,7 +18,6 @@ public class User {
         this.fullName = fullName;
         this.email = email;
         this.clientType = clientType;
-
 
     }
 
@@ -53,6 +53,8 @@ public class User {
         this.id = id;
     }
 
+
+
     public String getPhoneNumber() {
         return mPhoneNumber;
     }
@@ -61,4 +63,19 @@ public class User {
         this.mPhoneNumber = mPhoneNumber;
     }
 
+    public String getmPhoneNumber() {
+        return mPhoneNumber;
+    }
+
+    public void setmPhoneNumber(String mPhoneNumber) {
+        this.mPhoneNumber = mPhoneNumber;
+    }
+
+    public String getmProfileImage() {
+        return mProfileImage;
+    }
+
+    public void setmProfileImage(String mProfileImage) {
+        this.mProfileImage = mProfileImage;
+    }
 }

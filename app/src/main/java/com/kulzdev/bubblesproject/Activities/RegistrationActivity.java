@@ -41,6 +41,8 @@ import com.google.firebase.storage.UploadTask;
 import com.kulzdev.bubblesproject.Models.User;
 import com.kulzdev.bubblesproject.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class RegistrationActivity extends AppCompatActivity implements
 View.OnClickListener{
 
@@ -50,6 +52,8 @@ View.OnClickListener{
     private ProgressBar loadingProgress;
     private Button registerBtn;
     private TextView userLogin;
+
+
 
     private String TAG = "TAG";
 
@@ -77,6 +81,7 @@ View.OnClickListener{
         mUserFullName = (EditText) findViewById(R.id.txtViewfullName);
         mUserEmail = (EditText) findViewById(R.id.txtViewRegEmail);
         mUserPassword = (EditText) findViewById(R.id.txtViewRegPassword);
+
 
 
         //radio group
@@ -215,6 +220,7 @@ View.OnClickListener{
                 String fullName = mUserFullName.getText().toString();
                 String email = mUserEmail.getText().toString();
                 String password = mUserPassword.getText().toString();
+
 
                 User user = new User(fullName,email, userType);
 

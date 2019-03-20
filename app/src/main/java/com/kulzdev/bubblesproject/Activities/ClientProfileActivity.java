@@ -202,7 +202,7 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
 
-                            showMessage("Update successful, Try Again");
+                            showMessage("Update successful");
 
                         }else{
                             showMessage("Update failed, Try Again");

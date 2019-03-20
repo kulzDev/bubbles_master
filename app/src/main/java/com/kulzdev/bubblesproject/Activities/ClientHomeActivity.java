@@ -10,6 +10,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -34,6 +35,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.kulzdev.bubblesproject.Adapters.FlipperAdapter;
 import com.kulzdev.bubblesproject.Models.Services;
 import com.kulzdev.bubblesproject.Models.User;
 import com.kulzdev.bubblesproject.R;
@@ -53,14 +55,21 @@ public class ClientHomeActivity extends AppCompatActivity
     private FirebaseUser currentUser;
     private CircleImageView mUserPhoto;
     private Query dbUser;
+    private CardView mCardViewService;
 
 
 
     //for displaying
     private AdapterViewFlipper adapterViewFlipper;
-    private static final String[] TEXT = {"One","Two","Three","Four","Five","Six","Seven","Eight"};
-    private static final int[] IMAGES = {R.drawable.fade01,R.drawable.fade02,R.drawable.fade03,R.drawable.fade04,R.drawable.fade05
-            ,R.drawable.fade06,R.drawable.fade07,R.drawable.fade08};
+
+    private static final int[] IMAGES = {
+            R.drawable.sliderimage1,
+            R.drawable.sliderimage2,
+            R.drawable.sliderimage3,
+            R.drawable.sliderimage4,
+            R.drawable.sliderimage5
+    };
+
     private int mPosition = -1;
     Context context;
     private List<Services> services;
@@ -73,14 +82,7 @@ public class ClientHomeActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button inButton = (Button)findViewById(R.id.button);
-        inButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(ClientHomeActivity.this,ServicesActivity.class);
-                startActivity(in);
-            }
-        });
+
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -104,23 +106,29 @@ public class ClientHomeActivity extends AppCompatActivity
 
         dbUser.addValueEventListener(findUsersByID);
 
-
         //Diplaying the output
-        adapterViewFlipper = (AdapterViewFlipper)findViewById(R.id.viewFlip);
+        adapterViewFlipper = (AdapterViewFlipper)findViewById(R.id.viewFlipper);
         recyclerView = (RecyclerView)findViewById(R.id.recycleView) ;
 
         //creating adapter object
-        FlipperAdapter adapter = new FlipperAdapter(this,IMAGES,TEXT);
+        FlipperAdapter adapter = new FlipperAdapter(this,IMAGES);
         adapterViewFlipper.setAdapter(adapter);
         adapterViewFlipper.setAutoStart(true);
 
+        findViewById(R.id.cvHairServices).setOnClickListener(this);
+        findViewById(R.id.cvNailServices).setOnClickListener(this);
+        findViewById(R.id.cvMassageServices).setOnClickListener(this);
+        findViewById(R.id.cvMakeupServices).setOnClickListener(this);
+        findViewById(R.id.cvTatooServices).setOnClickListener(this);
+        findViewById(R.id.cvPiercingServices).setOnClickListener(this);
+
 
         //Services recyclerView methods
-        intializedata();
-        initializeAdapter();
+        //intializedata();
+        //initializeAdapter();
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        //navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
     }
@@ -180,6 +188,8 @@ public class ClientHomeActivity extends AppCompatActivity
                 signOut();
                 break;
             case R.id.nav_appointment:
+                Intent ie = new Intent(this, ClientListActivity.class);
+                startActivity(ie);
                 break;
         }
 
@@ -243,33 +253,7 @@ public class ClientHomeActivity extends AppCompatActivity
 
     }
 
-//added 9:50 by Nkazi
-private void intializedata(){
-    services = new ArrayList<>();
-    services.add(new Services("Hair Services",R.drawable.hairservices));
-    services.add(new Services("Massage",R.drawable.massage));
-    services.add(new Services("Make up",R.drawable.makeup));
-    services.add(new Services("Nail Services",R.drawable.nailservices));
 
-
-
-
-
-}
-    private void initializeAdapter(){
-        ServicesRecyclerViewAdapter servicesRecyclerViewAdapter = new ServicesRecyclerViewAdapter(services);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        recyclerView.setAdapter(servicesRecyclerViewAdapter);
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(ClientHomeActivity.this,ServicesActivity.class);
-                startActivity(in);
-            }
-        });
-
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -281,47 +265,30 @@ private void intializedata(){
                 Intent i = new Intent(this, ClientProfileActivity.class);
                 startActivity(i);
                 break;
+            case R.id.cvHairServices:
+                Toast.makeText(getApplicationContext(), "Hair Services Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.cvNailServices:
+                Toast.makeText(getApplicationContext(), "Nail Services Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.cvMakeupServices:
+                Toast.makeText(getApplicationContext(), "Makeup Services Clicked", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.cvMassageServices:
+                Toast.makeText(getApplicationContext(), "Massage Services Clicked", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.cvTatooServices:
+                Toast.makeText(getApplicationContext(), "Tatoo Services Clicked", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.cvPiercingServices:
+                Toast.makeText(getApplicationContext(), "Piercing Services Clicked", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
-    //class for the AdapterViewFlipper
-    class FlipperAdapter extends BaseAdapter {
-        Context ctx;
-        int[] images;
-        String[] text;
-        LayoutInflater inflater;
-
-        public FlipperAdapter(Context ctx, int[] images, String[] text) {
-            this.ctx = ctx;
-            this.images = images;
-            this.text = text;
-            inflater = LayoutInflater.from(ctx);
-        }
-
-        @Override
-        public int getCount(){
-            return text.length;
-        }
-
-        @Override
-        public Object getItem(int i){
-            return null;
-        }
-        @Override
-        public long getItemId(int i){
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup){
-            view = inflater.inflate(R.layout.flipper_items, null);
-            TextView txtname = (TextView)view.findViewById(R.id.idTextView);
-            ImageView txtImage = (ImageView)view.findViewById(R.id.idImageview);
-            txtname.setText(text[i]);
-            txtImage.setImageResource(images[i]);
-            return view;
-        }
-    }
 
     private void updateUI(FirebaseUser user) {
 
@@ -357,6 +324,8 @@ private void intializedata(){
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
                     return true;
+
+
             }
             return false;
         }
