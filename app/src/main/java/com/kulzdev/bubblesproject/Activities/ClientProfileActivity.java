@@ -212,7 +212,6 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
                     }
                 });
 
-
         //Update the Email
         user.updateEmail(mUser.getEmail())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {

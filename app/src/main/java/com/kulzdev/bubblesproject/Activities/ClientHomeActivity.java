@@ -56,6 +56,7 @@ public class ClientHomeActivity extends AppCompatActivity
     private CircleImageView mUserPhoto;
     private Query dbUser;
     private CardView mCardViewService;
+    private   ImageView nav_profile_image;
 
 
 
@@ -115,7 +116,13 @@ public class ClientHomeActivity extends AppCompatActivity
         adapterViewFlipper.setAdapter(adapter);
         adapterViewFlipper.setAutoStart(true);
 
-        findViewById(R.id.cvHairServices).setOnClickListener(this);
+        findViewById(R.id.cvHairServices).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getApplicationContext(),SelectService.class);
+                startActivity(in);
+            }
+        });
         findViewById(R.id.cvNailServices).setOnClickListener(this);
         findViewById(R.id.cvMassageServices).setOnClickListener(this);
         findViewById(R.id.cvMakeupServices).setOnClickListener(this);
@@ -235,7 +242,7 @@ public class ClientHomeActivity extends AppCompatActivity
         TextView navDisplayName = headerView.findViewById(R.id.nav_displayName);
 
         //Update the profile image here also
-        ImageView nav_profile_image = findViewById(R.id.nav_user_photo);
+         nav_profile_image = headerView.findViewById(R.id.nav_user_photo);
 
         navDisplayName.setText(user.getFullName());
 

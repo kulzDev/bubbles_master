@@ -27,16 +27,19 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:srcCompat="@drawable/ic_person"
         app:civ_circle_background_color="@android:color/white"
-        app:civ_border_color="@color/colorPrimary"
         app:civ_border_width="2dp"
+        app:civ_border_color="@color/colorPrimary"
+        android:contentDescription="@string/nav_header_desc"
+        android:padding="4dp"
+        android:paddingTop="0dp"
+        android:src="@drawable/ic_person"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.134" />
+        app:layout_constraintVertical_bias="0.134"/>
 
     <ImageView
         android:id="@+id/profile_back_arrow"
@@ -59,16 +62,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="76dp"
         android:layout_marginEnd="8dp"
-        app:srcCompat="@drawable/ic_notification"
+        android:padding="2dp"
         app:civ_border_color="@color/colorPrimary"
         app:civ_border_width="2dp"
+        android:src="@drawable/ic_edit_2"
         app:civ_circle_background_color="@color/colorPrimary"
+        android:contentDescription="@string/nav_header_desc"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
-        app:layout_constraintTop_toTopOf="@+id/profile_user_photo">
-
-    </de.hdodenhof.circleimageview.CircleImageView>
+        app:layout_constraintTop_toTopOf="@+id/profile_user_photo"
+        />
 
 
     <TextView

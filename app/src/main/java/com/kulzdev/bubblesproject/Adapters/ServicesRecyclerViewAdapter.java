@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kulzdev.bubblesproject.Activities.ServicesActivity;
+import com.kulzdev.bubblesproject.Activities.ClientHomeActivity;
 import com.kulzdev.bubblesproject.Models.Services;
 import com.kulzdev.bubblesproject.R;
 
@@ -67,7 +67,7 @@ public class ServicesRecyclerViewAdapter extends RecyclerView.Adapter<ServicesRe
             @Override
             public void onClick(View v) {
                 Log.d(",","Error - "+ i);
-                Intent inr = new Intent(mContext, ServicesActivity.class);
+                Intent inr = new Intent(mContext, ClientHomeActivity.class);
                 mContext.startActivity(inr);
 
             }
