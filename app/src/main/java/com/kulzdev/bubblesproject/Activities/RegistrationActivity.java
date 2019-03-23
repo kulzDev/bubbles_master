@@ -143,9 +143,14 @@ View.OnClickListener{
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
 
+                            if(user.getUserType() == "Stylist"){
+                                Intent i = new Intent(RegistrationActivity.this, ServicesRegistration.class);
+                                startActivity(i);
+                            }else{
+                                Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                startActivity(i);
+                            }
 
-                            Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
-                            startActivity(i);
                         }else{
                             showMessage("Registration failed, Try Again");
                             registerBtn.setVisibility(View.VISIBLE);

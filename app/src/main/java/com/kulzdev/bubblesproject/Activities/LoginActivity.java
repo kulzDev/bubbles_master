@@ -112,12 +112,13 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void updateUI(){
 
-        if(findUser.getClientType().toString().equals("Client")){
+        if(findUser.getUserType().toString().equals("Client")){
             Intent i = new Intent(LoginActivity.this, ClientHomeActivity.class);
             startActivity(i);
         }else{
-
-            Toast.makeText(getApplicationContext(),"Stylis Activity Doesn't exist YET",Toast.LENGTH_LONG).show();
+            Intent i = new Intent(LoginActivity.this, ServicesRegistration.class);
+            startActivity(i);
+            Toast.makeText(getApplicationContext(),"Stylist Activity Doesn't exist YET",Toast.LENGTH_LONG).show();
 
             //Intent i = new Intent(LoginActivity.this, StylistActivity.class);
            // startActivity(i);

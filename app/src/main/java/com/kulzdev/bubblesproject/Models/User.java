@@ -4,7 +4,7 @@ public class User {
 
     private String fullName;
     private String email;
-    private String clientType;
+    private String userType;
     private String mPhoneNumber;
     private String mProfileImage;
     private String id;
@@ -17,7 +17,7 @@ public class User {
     public User(String fullName, String email, String clientType) {
         this.fullName = fullName;
         this.email = email;
-        this.clientType = clientType;
+        this.userType = clientType;
 
     }
 
@@ -37,12 +37,12 @@ public class User {
         this.email = email;
     }
 
-    public String getClientType() {
-        return clientType;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setClientType(String clientType) {
-        this.clientType = clientType;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getId() {
