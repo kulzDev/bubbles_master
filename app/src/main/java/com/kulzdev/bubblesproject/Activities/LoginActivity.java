@@ -116,12 +116,9 @@ public class LoginActivity extends AppCompatActivity implements
             Intent i = new Intent(LoginActivity.this, ClientHomeActivity.class);
             startActivity(i);
         }else{
-            Intent i = new Intent(LoginActivity.this, ServicesRegistration.class);
+            Intent i = new Intent(LoginActivity.this, StylistHomeActivity.class);
             startActivity(i);
-            //Toast.makeText(getApplicationContext(),"Stylist Activity Doesn't exist YET",Toast.LENGTH_LONG).show();
 
-            //Intent i = new Intent(LoginActivity.this, StylistActivity.class);
-           // startActivity(i);
         }
 
     }

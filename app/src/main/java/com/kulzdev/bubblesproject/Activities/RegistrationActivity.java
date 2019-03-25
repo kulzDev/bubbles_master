@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -124,10 +125,13 @@ View.OnClickListener{
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
 
-                            if(user.getmUserType() == "Stylist"){
-                                Intent i = new Intent(RegistrationActivity.this, ServicesRegistration.class);
+                            showMessage(user.getmUserType());
+                            if(user.getmUserType().toString().equals("Stylist")){
+                                Log.d(TAG,"We are here: " + user.getmUserType());
+                                Intent i = new Intent(RegistrationActivity.this, StylistLocationActivity.class);
                                 startActivity(i);
-                            }else{
+                            }else  {
+                                showMessage("Not a stylist");
                                 Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
                                 startActivity(i);
                             }
