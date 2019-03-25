@@ -15,8 +15,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -99,9 +97,9 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
                 }
 
                 //fill text field with db data
-                mFullName.setText(mUser.getFullName());
+                mFullName.setText(mUser.getmFullName());
                 mEmail.setText(mUser.getEmail());
-                mDisplayName.setText(mUser.getFullName());
+                mDisplayName.setText(mUser.getmFullName());
 
 
                 if(mUser.getPhoneNumber() != null){
@@ -162,7 +160,7 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
         }
 
         mUser.setEmail(mEmail.getText().toString());
-        mUser.setFullName(mFullName.getText().toString());
+        mUser.setmFullName(mFullName.getText().toString());
 
 
         //phone number is not required
@@ -178,7 +176,7 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(mUser.getFullName())
+                .setDisplayName(mUser.getmFullName())
                 .build();
 
 
@@ -239,7 +237,7 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
 
 
                             UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(mUser.getFullName())
+                                    .setDisplayName(mUser.getmFullName())
                                     .setPhotoUri(uri)
                                     .build();
 

@@ -11,18 +11,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,9 +33,7 @@ import com.kulzdev.bubblesproject.Adapters.FlipperAdapter;
 import com.kulzdev.bubblesproject.Models.Services;
 import com.kulzdev.bubblesproject.Models.User;
 import com.kulzdev.bubblesproject.R;
-import com.kulzdev.bubblesproject.Adapters.ServicesRecyclerViewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -244,7 +236,7 @@ public class ClientHomeActivity extends AppCompatActivity
         //Update the profile image here also
          nav_profile_image = headerView.findViewById(R.id.nav_user_photo);
 
-        navDisplayName.setText(user.getFullName());
+        navDisplayName.setText(user.getmFullName());
 
         //currentUser.up
 

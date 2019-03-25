@@ -33,5 +33,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="update_profile">Edit Profile</string>
+    <string name="dropped_pin">You are here</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

@@ -44,7 +44,7 @@ public class ClientListRecyclerAdapter extends RecyclerView.Adapter<ClientListRe
     @Override
     public void onBindViewHolder(@NonNull ClientListView clientListView, int position) {
 
-        clientListView.userName.setText(mUsers.get(position).getFullName());
+        clientListView.userName.setText(mUsers.get(position).getmFullName());
         //clientListView.eMail.setText(users.get(position).getEmail());
       //  Picasso.get().load(users.get(position).getProfilePics()).into(clientListView.imageView);
 

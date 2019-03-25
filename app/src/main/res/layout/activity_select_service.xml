@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="Services Selected"
             android:textSize="25dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="20dp"
             android:textColor="#fff"/>
 
     </android.support.v7.widget.Toolbar>
@@ -108,8 +108,10 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnSearchFilter"
             android:background="@drawable/styled_search_btn"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="SEARCH"/>

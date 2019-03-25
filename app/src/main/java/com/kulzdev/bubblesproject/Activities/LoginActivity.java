@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void updateUI(){
 
-        if(findUser.getUserType().toString().equals("Client")){
+        if(findUser.getmUserType().toString().equals("Client")){
             Intent i = new Intent(LoginActivity.this, ClientHomeActivity.class);
             startActivity(i);
         }else{
