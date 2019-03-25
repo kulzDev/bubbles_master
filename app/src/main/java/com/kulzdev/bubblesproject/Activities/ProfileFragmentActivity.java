@@ -41,10 +41,10 @@ public class ProfileFragmentActivity extends Fragment {
         lStylist.add(new User("bruce mo",R.drawable.sliderimage1,null));
         lStylist.add(new User("nia fey",R.drawable.sliderimage1,null));
         lStylist.add(new User("xan be",R.drawable.sliderimage1,null));
-        lStylist.add(new User("billy",R.drawable.sliderimage1,null));
-        lStylist.add(new User("daniel",R.drawable.sliderimage1,null));
-        lStylist.add(new User("sun",R.drawable.sliderimage1,null));
-        lStylist.add(new User("tina",R.drawable.sliderimage1,null));
+        lStylist.add(new User("billy grim",R.drawable.sliderimage1,null));
+        lStylist.add(new User("daniel judo",R.drawable.sliderimage1,null));
+        lStylist.add(new User("sun moon",R.drawable.sliderimage1,null));
+        lStylist.add(new User("tina lost",R.drawable.sliderimage1,null));
     }
 
     @Override
