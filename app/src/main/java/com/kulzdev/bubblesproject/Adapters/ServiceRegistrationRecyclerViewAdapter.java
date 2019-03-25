@@ -21,6 +21,10 @@ public class ServiceRegistrationRecyclerViewAdapter
     List<ServicesList> services;
     private Context mContext;
 
+    public ServiceRegistrationRecyclerViewAdapter(List<ServicesList> services) {
+        this.services = services;
+    }
+
     public ServiceRegistrationRecyclerViewAdapter(List<ServicesList> services, Context mContext) {
         this.services = services;
         this.mContext = mContext;
