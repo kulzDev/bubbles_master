@@ -94,17 +94,17 @@ View.OnClickListener{
 
             return;
         }else{
-            mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
+
+            Log.d(TAG, user.getEmail() + " ; " + user.getFullName()+ " ; " + password);
+           mAuth.createUserWithEmailAndPassword(user.getEmail(), password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isComplete()) {
                                 showMessage("Account Created");
                                 Log.d(TAG,"mAuth Id : " + mAuth.getCurrentUser());
-
-                                //user.setId(mAuth.getCurrentUser().getUid()); //this will match the mAuth and Database userID
+                                user.setId(mAuth.getCurrentUser().getUid()); //this will match the mAuth and Database userID
                                 updateUserInfo(user, mAuth.getCurrentUser());
-
                             } else {
                                 showMessage("Account creation failed" + task.getException().getMessage());
                                 registerBtn.setVisibility(View.VISIBLE);
@@ -120,32 +120,38 @@ View.OnClickListener{
 
     private void updateUserInfo(final User user,final FirebaseUser currentUser) {
         /*TODO: Create a new user - Bubbles Database*/
-        mDatabase.child(user.getId())
-                .setValue(user)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
 
-                            showMessage(user.getUserType());
-                            if(user.getUserType().toString().equals("Stylist")){
-                                Log.d(TAG,"We are here: " + user.getUserType());
-                                Intent i = new Intent(RegistrationActivity.this, StylistLocationActivity.class);
-                                startActivity(i);
-                            }else  {
-                                showMessage("Not a stylist");
-                                Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
-                                startActivity(i);
+        if(user.getId() != null) {
+            mDatabase.child(user.getId())
+                    .setValue(user)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+
+                                showMessage(user.getUserType());
+                                if (user.getUserType().toString().equals("Stylist")) {
+                                    Log.d(TAG, "We are here: " + user.getUserType());
+                                    Intent i = new Intent(RegistrationActivity.this, StylistLocationActivity.class);
+                                    startActivity(i);
+                                } else {
+                                    showMessage("Not a stylist");
+                                    Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                                    startActivity(i);
+                                }
+
+                            } else {
+                                showMessage("Registration failed, Try Again");
+                                registerBtn.setVisibility(View.VISIBLE);
+                                loadingProgress.setVisibility(View.INVISIBLE);
                             }
 
-                        }else{
-                            showMessage("Registration failed, Try Again");
-                            registerBtn.setVisibility(View.VISIBLE);
-                            loadingProgress.setVisibility(View.INVISIBLE);
                         }
+                    });
+        }else{
+            showMessage("UserID is null");
+        }
 
-                    }
-                });
     }
 
     private void showMessage(String message) {
