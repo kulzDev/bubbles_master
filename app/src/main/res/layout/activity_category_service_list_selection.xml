@@ -30,7 +30,8 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Finish"
+        android:textColor="@android:color/white"
+        android:text="Next"
         android:background="@drawable/styled_search_btn"
         android:layout_marginTop="20dp"/>
 

@@ -236,7 +236,7 @@ public class ClientHomeActivity extends AppCompatActivity
         //Update the profile image here also
          nav_profile_image = headerView.findViewById(R.id.nav_user_photo);
 
-        navDisplayName.setText(user.getmFullName());
+        navDisplayName.setText(user.getFullName());
 
         //currentUser.up
 

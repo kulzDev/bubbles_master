@@ -36,8 +36,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.stylistSkill.setText((CharSequence) mData.get(i).getmServices());
-        myViewHolder.stylistName.setText(mData.get(i).getmFullName());
+        myViewHolder.stylistSkill.setText((CharSequence) mData.get(i).getServices());
+        myViewHolder.stylistName.setText(mData.get(i).getFullName());
         myViewHolder.stylistImg.setImageResource(mData.get(i).getProfileImage());
     }
 

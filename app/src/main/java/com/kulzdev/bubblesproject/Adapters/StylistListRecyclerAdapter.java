@@ -18,13 +18,13 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ClientListRecyclerAdapter extends RecyclerView.Adapter<ClientListRecyclerAdapter.ClientListView>{
+public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistListRecyclerAdapter.StylistListView>{
 
     private Context mContext;
     private ArrayList<User> mUsers;
     private FirebaseAuth mAuth;
 
-    public ClientListRecyclerAdapter(Context mContext,ArrayList<User> users) {
+    public StylistListRecyclerAdapter(Context mContext,ArrayList<User> users) {
         this.mContext = mContext;
         this.mUsers = users;
         mAuth = FirebaseAuth.getInstance();
@@ -32,32 +32,32 @@ public class ClientListRecyclerAdapter extends RecyclerView.Adapter<ClientListRe
 
     @NonNull
     @Override
-    public ClientListView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public StylistListView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_list_item, viewGroup, false);
+        View view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.appointment_user_list, viewGroup, false);
 
 
-        return new ClientListView(view);
+        return new StylistListView(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClientListView clientListView, int position) {
+    public void onBindViewHolder(@NonNull StylistListView clientListView, int position) {
 
         clientListView.userName.setText(mUsers.get(position).getFullName());
         //clientListView.eMail.setText(users.get(position).getEmail());
-      //  Picasso.get().load(users.get(position).getProfilePics()).into(clientListView.imageView);
+        //  Picasso.get().load(users.get(position).getProfilePics()).into(clientListView.imageView);
 
 
     }
 
     @Override
     public int getItemCount() {
-       return mUsers.size();
+        return mUsers.size();
 
     }
 
-    public class ClientListView extends RecyclerView.ViewHolder{
+    public class StylistListView extends RecyclerView.ViewHolder{
 
         CircleImageView imageView;
         TextView userName;
@@ -65,7 +65,7 @@ public class ClientListRecyclerAdapter extends RecyclerView.Adapter<ClientListRe
         Button cancel_btn;
         ImageView btnBack_arrow;
 
-        public ClientListView(@NonNull View itemView) {
+        public StylistListView(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.appointment_user_profileImage);
@@ -73,7 +73,7 @@ public class ClientListRecyclerAdapter extends RecyclerView.Adapter<ClientListRe
             confirm_btn = itemView.findViewById(R.id.btnStylist_confirm_client);
             cancel_btn = itemView.findViewById(R.id.btnStylist_cancel_client);
             btnBack_arrow = itemView.findViewById(R.id.appointment_back_arrow);
-         //   eMail = itemView.findViewById(R.id.Email);
+            //   eMail = itemView.findViewById(R.id.Email);
 
         }
     }

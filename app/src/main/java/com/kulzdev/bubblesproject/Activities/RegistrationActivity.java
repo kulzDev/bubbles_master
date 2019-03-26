@@ -100,7 +100,9 @@ View.OnClickListener{
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isComplete()) {
                                 showMessage("Account Created");
-                                user.setId(mAuth.getCurrentUser().getUid()); //this will match the mAuth and Database userID
+                                Log.d(TAG,"mAuth Id : " + mAuth.getCurrentUser());
+
+                                //user.setId(mAuth.getCurrentUser().getUid()); //this will match the mAuth and Database userID
                                 updateUserInfo(user, mAuth.getCurrentUser());
 
                             } else {
@@ -125,9 +127,9 @@ View.OnClickListener{
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
 
-                            showMessage(user.getmUserType());
-                            if(user.getmUserType().toString().equals("Stylist")){
-                                Log.d(TAG,"We are here: " + user.getmUserType());
+                            showMessage(user.getUserType());
+                            if(user.getUserType().toString().equals("Stylist")){
+                                Log.d(TAG,"We are here: " + user.getUserType());
                                 Intent i = new Intent(RegistrationActivity.this, StylistLocationActivity.class);
                                 startActivity(i);
                             }else  {

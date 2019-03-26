@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +40,9 @@ import com.kulzdev.bubblesproject.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ClientProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class StylistProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private TextInputEditText mFullName, mEmail, mPhoneNumbers;
+    private TextInputEditText mFullName, mEmail, mPhoneNumbers,mAddress;
     private TextView mDisplayName;
     private FirebaseAuth mAuth;
     private CircleImageView mProfilePhoto;
@@ -55,12 +56,15 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_profile);
+        setContentView(R.layout.activity_stylist_profile);
 
-        mFullName = (TextInputEditText)findViewById(R.id.txtProfileFullName);
-        mEmail = (TextInputEditText)findViewById(R.id.txtProfileEmail);
-        mPhoneNumbers = (TextInputEditText)findViewById(R.id.txtProfilePhoneNumber);
-        mDisplayName = findViewById(R.id.profile_displayName);
+        mFullName = (TextInputEditText)findViewById(R.id.txtStylistProfileFullName);
+        mEmail = (TextInputEditText)findViewById(R.id.txtStylistProfileEmail);
+        mPhoneNumbers = (TextInputEditText)findViewById(R.id.txtStylistProfilePhoneNumber);
+        mDisplayName = findViewById(R.id.profile_Stylist_displayName);
+        mAddress = findViewById(R.id.txtStylistProfileBussnessAddress);
+        mProfilePhoto = findViewById(R.id.stylist_profile_user_photo);
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -68,14 +72,12 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
         searchUser(mAuth.getCurrentUser());
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        mProfilePhoto = findViewById(R.id.profile_user_photo);
+        findViewById(R.id.btnStylistUpdateProfile).setOnClickListener(this);
+        findViewById(R.id.stylist_profile_back_arrow).setOnClickListener(this);
 
+        mProfilePhoto.setOnClickListener(this);  //profile image
 
-        findViewById(R.id.btnUpdateProfile).setOnClickListener(this);
-        findViewById(R.id.profile_back_arrow).setOnClickListener(this);
-        mProfilePhoto.setOnClickListener(this);
     }
-
 
     private void searchUser(FirebaseUser currentUser) {
 
@@ -100,13 +102,20 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
                 mFullName.setText(mUser.getFullName());
                 mEmail.setText(mUser.getEmail());
                 mDisplayName.setText(mUser.getFullName());
+                //mAddress.setText(mUser.getUserAddress());
 
+                if(mUser.getUserAddress() != null){
+                    mAddress.setText(mUser.getUserAddress());
+                }
 
                 if(mUser.getPhoneNumber() != null){
                     mPhoneNumbers.setText(mUser.getPhoneNumber());
                 }
 
-                Glide.with(ClientProfileActivity.this).load(mAuth.getCurrentUser().getPhotoUrl()).into(mProfilePhoto);
+
+                if( mAuth.getCurrentUser().getPhotoUrl() != null) {
+                    Glide.with(StylistProfileActivity.this).load(mAuth.getCurrentUser().getPhotoUrl()).into(mProfilePhoto);
+                }
 
                 Log.d(TAG,"dataSnapshot does  exist");
 
@@ -126,32 +135,33 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
 
         int id = v.getId();
-
         switch (id){
-            case R.id.btnUpdateProfile:
+            case R.id.btnStylistUpdateProfile:
 
                 if(mUser != null){
                     //update the user with the given valudes
                     updateUser();
-
                 }
                 break;
 
 
-            case R.id.profile_user_photo:
+            case R.id.stylist_profile_user_photo:
                 if (Build.VERSION.SDK_INT >= 22) {
                     checkAndRequestPermission();
                 } else {
                     openGallery();
                 }
                 break;
-            case R.id.profile_back_arrow:
-                Intent i =  new Intent(this, ClientHomeActivity.class);
+
+            case R.id.stylist_profile_back_arrow:
+                Intent i =  new Intent(this, StylistHomeActivity.class);
                 startActivity(i);
                 break;
         }
 
     }
+
+
 
     private void updateUser() {
 
@@ -164,11 +174,19 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
 
 
         //phone number is not required
-        String password = mPhoneNumbers.getText().toString();
-        if (TextUtils.isEmpty(password)) {
+        String phoneNumbers = mPhoneNumbers.getText().toString();
+        if (TextUtils.isEmpty(phoneNumbers)) {
 
         } else {
             mUser.setPhoneNumber(mPhoneNumbers.getText().toString());
+        }
+
+        //phone number is not required
+        String address = mAddress.getText().toString();
+        if (TextUtils.isEmpty(address)) {
+
+        } else {
+            mUser.setUserAddress(mAddress.getText().toString());
         }
 
         mUser.setId(mAuth.getCurrentUser().getUid());
@@ -266,7 +284,6 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
-
     private boolean validateForm() {
 
         /*TODO: Validate the Text Field Data
@@ -282,8 +299,6 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
             mEmail.setError(null);
         }
 
-
-
         String fullname = mFullName.getText().toString();
         if (TextUtils.isEmpty(fullname)) {
             mFullName.setError("Required.");
@@ -292,18 +307,24 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
             mFullName.setError(null);
         }
 
+        String address = mAddress.getText().toString();
+        if (TextUtils.isEmpty(fullname)) {
+            mAddress.setError("Required.");
+            valid = false;
+        } else {
+            mAddress.setError(null);
+        }
+
         return valid;
     }
 
-
-
     private void checkAndRequestPermission() {
-        if (ContextCompat.checkSelfPermission(ClientProfileActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(ClientProfileActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                Toast.makeText(ClientProfileActivity.this, "Please accept for permission", Toast.LENGTH_LONG).show();
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                Toast.makeText(this, "Please accept for permission", Toast.LENGTH_LONG).show();
             } else {
-                ActivityCompat.requestPermissions(ClientProfileActivity.this,
+                ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PReCode);
                 Log.d("Img", "checkAndRequestPermission permission accepted");
                 openGallery();
@@ -324,7 +345,6 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
 
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -338,9 +358,4 @@ public class ClientProfileActivity extends AppCompatActivity implements View.OnC
 
         }
     }
-
-
-
-
-
 }

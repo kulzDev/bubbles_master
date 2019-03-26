@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "109554618765-0v05jib5paehi2pttj7odnftq0b26etk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kulzdev.bubblesproject",
+            "certificate_hash": "ccecf6f410820bcb635329ce6e613ed9ec2d003f"
+          }
+        },
+        {
           "client_id": "109554618765-4qqn9aatb5ab110u49k7ijl34khlcjda.apps.googleusercontent.com",
           "client_type": 3
         }

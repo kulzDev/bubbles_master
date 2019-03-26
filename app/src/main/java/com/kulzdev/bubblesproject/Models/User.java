@@ -9,6 +9,7 @@ public class User {
     private String mUserType;
     private String mPhoneNumber;
     private int mProfileImage;
+    private String mUserAddress;
     private String id;
     private List<Services> mServices;
 
@@ -31,11 +32,11 @@ public class User {
 
     }
 
-    public String getmFullName() {
+    public String getFullName() {
         return mFullName;
     }
 
-    public void setmFullName(String mFullName) {
+    public void setFullName(String mFullName) {
         this.mFullName = mFullName;
     }
 
@@ -47,11 +48,11 @@ public class User {
         this.email = email;
     }
 
-    public String getmUserType() {
+    public String getUserType() {
         return mUserType;
     }
 
-    public void setmUserType(String mUserType) {
+    public void setUserType(String mUserType) {
         this.mUserType = mUserType;
     }
 
@@ -79,25 +80,18 @@ public class User {
         this.mPhoneNumber = mPhoneNumber;
     }
 
-    public String getmPhoneNumber() {
-        return mPhoneNumber;
-    }
-
-    public void setmPhoneNumber(String mPhoneNumber) {
-        this.mPhoneNumber = mPhoneNumber;
-    }
-    public List<Services> getmServices() {
-        return mServices;
-    }
-
-    public void setmServices(List<Services> mServices) {
-        this.mServices = mServices;
-    }
     public int getProfileImage() {
         return mProfileImage;
     }
 
     public void setProfileImage(int mProfileImage) {
         this.mProfileImage = mProfileImage;
+    }
+    public String getUserAddress() {
+        return mUserAddress;
+    }
+
+    public void setUserAddress(String mUserAddress) {
+        this.mUserAddress = mUserAddress;
     }
 }

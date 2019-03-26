@@ -15,8 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.CategoryServiceListSelectionActivity"></activity>
-        <activity android:name=".Activities.StylistHomeActivity" />
+        <activity android:name=".Activities.StylistProfileActivity"></activity>
+        <activity
+            android:name=".Activities.StylistHomeActivity"
+            android:label="@string/title_activity_stylist_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.CategoryServiceListSelectionActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

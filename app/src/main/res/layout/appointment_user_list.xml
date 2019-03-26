@@ -92,7 +92,7 @@
                     android:id="@+id/btnStylist_confirm_client"
                     android:layout_width="80dp"
                     android:layout_height="25dp"
-                    android:text="pending"
+                    android:text="accept"
                     android:textAllCaps="false"
                     android:textColor="#FFFF"
                     android:textSize="13sp"
