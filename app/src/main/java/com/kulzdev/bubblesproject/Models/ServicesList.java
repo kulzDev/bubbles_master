@@ -6,23 +6,32 @@ public class ServicesList {
     private int imageId;
     private String name;
     private String serviceCheckboxId;
+    private String serviceCheckboxType;
+    private int serviceTypeId;
 
     public ServicesList(int imageId, String name) {
         this.imageId = imageId;
         this.name = name;
     }
 
-    public ServicesList(){
-
-
+    public ServicesList(String serviceCheckboxType) {
+        this.serviceCheckboxType = serviceCheckboxType;
     }
 
-    public ServicesList(String serviceType) {
-        this.serviceType = serviceType;
-    }
+    public ServicesList(){    }
+
+
 
     public String getServiceType() {
         return serviceType;
+    }
+
+    public int getServiceTypeId() {
+        return serviceTypeId;
+    }
+
+    public void setServiceTypeId(int serviceTypeId) {
+        this.serviceTypeId = serviceTypeId;
     }
 
     public void setServiceType(String serviceType) {
@@ -51,5 +60,13 @@ public class ServicesList {
 
     public void setServiceCheckboxId(String serviceCheckboxId) {
         this.serviceCheckboxId = serviceCheckboxId;
+    }
+
+    public String getServiceCheckboxType() {
+        return serviceCheckboxType;
+    }
+
+    public void setServiceCheckboxType(String serviceCheckboxType) {
+        this.serviceCheckboxType = serviceCheckboxType;
     }
 }

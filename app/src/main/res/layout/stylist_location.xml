@@ -19,21 +19,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/location_back_arrow"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_left_arrow" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enter Location"
             android:gravity="center"
+            android:paddingLeft="25dp"
             android:textColor="#fff"
             android:textSize="25dp" />
 
@@ -66,10 +58,11 @@
         android:layout_marginEnd="110dp"
         android:layout_marginBottom="45dp"
         android:elevation="2dp"
-        android:text="help us find you!"
-        android:textColor="#000"
+
         android:gravity="center"
+        android:hint="Enter address"
         android:inputType="textPostalAddress"
+        android:textColor="#000"
         app:layout_constraintBottom_toTopOf="@+id/btnLocation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

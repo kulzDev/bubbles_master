@@ -29,7 +29,7 @@ public class ServicesRegistration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services_registration);
-        //btnNextSelection = (Button)findViewById(R.id.btnNext);
+        btnNextSelection = (Button)findViewById(R.id.btnNext);
 
 
         recyclerView = findViewById(R.id.servicesRegistrationRecyclerView);
@@ -46,13 +46,13 @@ public class ServicesRegistration extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));
         recyclerView.setAdapter(adapter);
 
-//        btnNextSelection.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Intent intent = new Intent(getApplicationContext(),);
-////                startActivity(intent);
-//            }
-//        });
+        btnNextSelection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ServicesRegistration.this,CategoryServiceListSelectionActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

@@ -228,8 +228,6 @@ View.OnClickListener{
                 startActivity(i);
                 break;
 
-
         }
-
     }
 }
