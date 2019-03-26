@@ -32,8 +32,6 @@ public class CategoryServiceListSelectionActivity extends AppCompatActivity {
         recyclerViewList = (RecyclerView) findViewById(R.id.serviceSelectionRecycleview);
         btnFinish = (Button)findViewById(R.id.btnFinish);
 
-
-
         servicesLists = new ArrayList<>();
         servicesLists.add(new ServicesList("Swidish cut"));
         servicesLists.add(new ServicesList("German cut"));
