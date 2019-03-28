@@ -40,4 +40,21 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_stylist_home">StylistHomeActivity</string>
 
+    <string name="service_prompt">Choose a service</string>
+
+    <string-array name="service_category">
+        <item> Select Service to offer</item>
+        <item> Nail Services</item>
+        <item> Hair Services</item>
+        <item> Massage Services</item>
+    </string-array>
+
+    <string-array name="hair_services">
+        <item> Cut</item>
+        <item> Mohawk</item>
+        <item> French Twist</item>
+    </string-array>
+
+
+
 </resources>

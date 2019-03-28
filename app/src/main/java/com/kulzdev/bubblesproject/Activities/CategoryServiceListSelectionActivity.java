@@ -33,7 +33,7 @@ public class CategoryServiceListSelectionActivity extends AppCompatActivity {
         btnFinish = (Button)findViewById(R.id.btnFinish);
 
         servicesLists = new ArrayList<>();
-        servicesLists.add(new ServicesList("Swidish cut"));
+     /*   servicesLists.add(new ServicesList("Swidish cut"));
         servicesLists.add(new ServicesList("German cut"));
         servicesLists.add(new ServicesList("Bob cut"));
         servicesLists.add(new ServicesList("Rebecca cut"));
@@ -44,7 +44,7 @@ public class CategoryServiceListSelectionActivity extends AppCompatActivity {
         servicesLists.add(new ServicesList("Bob cut"));
         servicesLists.add(new ServicesList("Rebecca cut"));
         servicesLists.add(new ServicesList("Mohawk "));
-        servicesLists.add(new ServicesList("Graffit styling"));
+        servicesLists.add(new ServicesList("Graffit styling"));*/
 
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(context);
         recyclerViewList.setLayoutManager(linearLayoutManager);

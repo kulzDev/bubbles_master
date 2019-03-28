@@ -82,7 +82,7 @@ public class SelectService extends AppCompatActivity {
 
     private void  servicesOffer() {
         lists = new ArrayList<>();
-        lists.add(new ServicesList("Cut"));
+    /*    lists.add(new ServicesList("Cut"));
         lists.add(new ServicesList("Coloring"));
         lists.add(new ServicesList("Mohawk"));
         lists.add(new ServicesList("Brush"));
@@ -108,7 +108,7 @@ public class SelectService extends AppCompatActivity {
         lists.add(new ServicesList("Bob cut"));
         lists.add(new ServicesList("Shave"));
         lists.add(new ServicesList("CUT"));
-        lists.add(new ServicesList("CUT"));
+        lists.add(new ServicesList("CUT"));*/
 
         iniBit();
     }

@@ -40,9 +40,9 @@ public class ServiceRegistrationRecyclerViewAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.imageServiceCategory.setImageResource(services.get(i).getImageId());
+      /*  viewHolder.imageServiceCategory.setImageResource(services.get(i).getImageId());
         viewHolder.checkBoxServiceCategory.setText(services.get(i).getServiceCheckboxId());
-        viewHolder.TextServiceCategory.setText(services.get(i).getName());
+        viewHolder.TextServiceCategory.setText(services.get(i).getName());*/
 
     }
 

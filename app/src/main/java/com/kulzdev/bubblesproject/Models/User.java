@@ -5,13 +5,13 @@ import java.util.List;
 public class User {
 
     private String mFullName;
-    private String email;
+    private String mEmail;
     private String mUserType;
     private String mPhoneNumber;
     private int mProfileImage;
     private String mUserAddress;
     private String id;
-    private List<Services> mServices;
+    private List<ServicesList> mServices;
 
 
 
@@ -19,16 +19,16 @@ public class User {
 
     }
 
-    public User(String mFullName, int mProfileImage, List<Services> mServices) {
+    public User(String mFullName, int mProfileImage, List<ServicesList> mServices) {
         this.mFullName = mFullName;
         this.mProfileImage = mProfileImage;
         this.mServices = mServices;
     }
 
-    public User(String fullName, String email, String clientType) {
-        this.mFullName = fullName;
-        this.email = email;
-        this.mUserType = clientType;
+    public User(String mFullName, String mEmail, String mClientType) {
+        this.mFullName = mFullName;
+        this.mEmail = mEmail;
+        this.mUserType = mClientType;
 
     }
 
@@ -41,11 +41,11 @@ public class User {
     }
 
     public String getEmail() {
-        return email;
+        return mEmail;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.mEmail = email;
     }
 
     public String getUserType() {
@@ -64,11 +64,11 @@ public class User {
         this.id = id;
     }
 
-    public List<Services> getServices() {
+    public List<ServicesList> getServices() {
         return mServices;
     }
 
-    public void setServices(List<Services> mServices) {
+    public void setServices(List<ServicesList> mServices) {
         this.mServices = mServices;
     }
 

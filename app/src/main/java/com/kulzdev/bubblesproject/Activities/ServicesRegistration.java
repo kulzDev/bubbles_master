@@ -35,12 +35,12 @@ public class ServicesRegistration extends AppCompatActivity {
         recyclerView = findViewById(R.id.servicesRegistrationRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<ServicesList>();
-        list.add(new ServicesList(R.drawable.makeup,"Nail Services"));
+   /*     list.add(new ServicesList(R.drawable.makeup,"Nail Services"));
         list.add(new ServicesList(R.drawable.hairservices,"Hair Services"));
         list.add(new ServicesList(R.drawable.massageservice,"Massage Services"));
         list.add(new ServicesList(R.drawable.makeup,"Make-up Services"));
         list.add(new ServicesList(R.drawable.massageservice,"Massage Services"));
-        list.add(new ServicesList(R.drawable.makeup,"Make-up Services"));
+        list.add(new ServicesList(R.drawable.makeup,"Make-up Services"));*/
 
         adapter = new ServiceRegistrationRecyclerViewAdapter(list);
         recyclerView.setLayoutManager(new GridLayoutManager(this,1));

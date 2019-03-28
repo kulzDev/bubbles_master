@@ -43,7 +43,7 @@ public class HairServicesAdapter extends RecyclerView.Adapter<HairServicesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ServicesViewHolder servicesViewHolder, int i) {
-servicesViewHolder.checkBox.setText(servicesLists.get(i).getServiceType());
+//servicesViewHolder.checkBox.setText(servicesLists.get(i).getServiceType());
 
     }
 

@@ -41,7 +41,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     @Override
     public void onBindViewHolder(@NonNull CategoryHolder categoryHolder, int i) {
         //categoryHolder.serviceListTxt.setText(listC.get(i).getName());
-        categoryHolder.serviceListCheckBox.setText(listC.get(i).getServiceCheckboxType());
+        //categoryHolder.serviceListCheckBox.setText(listC.get(i).getServiceCheckboxType());
     }
 
     @Override
