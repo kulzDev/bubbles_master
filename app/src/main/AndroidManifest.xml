@@ -47,6 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.RegistrationActivity" />
         <activity android:name=".Activities.StylistLocationActivity" />
+        <activity android:name=".Activities.AppointmentActivity" /> 
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

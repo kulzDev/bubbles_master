@@ -24,9 +24,9 @@ import static com.kulzdev.bubblesproject.Adapters.HairServicesAdapter.*;
 public class HairServicesAdapter extends RecyclerView.Adapter<HairServicesAdapter.ServicesViewHolder>{
 
     private Context sContext;
-    private ArrayList<ServicesList> servicesLists;
+    private ServicesList servicesLists;
 
-    public HairServicesAdapter(ArrayList<ServicesList> servicesLists) {
+    public HairServicesAdapter(ServicesList servicesLists) {
         this.sContext = sContext;
         this.servicesLists = servicesLists;
     }
@@ -43,13 +43,13 @@ public class HairServicesAdapter extends RecyclerView.Adapter<HairServicesAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ServicesViewHolder servicesViewHolder, int i) {
-//servicesViewHolder.checkBox.setText(servicesLists.get(i).getServiceType());
+        servicesViewHolder.checkBox.setText(servicesLists.getServiceList().get(i).toString());
 
     }
 
     @Override
     public int getItemCount() {
-        return servicesLists.size();
+        return servicesLists.getServiceList().size();
 
     }
 

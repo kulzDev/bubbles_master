@@ -32,8 +32,8 @@ public class FilterResultActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_filter_list_black_24dp);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_map_black_24dp);
+     /*   tabLayout.getTabAt(0).setIcon(R.drawable.ic_filter_list_black_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_map_black_24dp);*/
 
     }
 }

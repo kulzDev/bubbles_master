@@ -100,9 +100,10 @@ View.OnClickListener{
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isComplete()) {
+                            if (task.isComplete() && mAuth.getCurrentUser() != null) {
                                 showMessage("Account Created");
-                                Log.d(TAG,"mAuth Id : " + mAuth.getCurrentUser());
+                               // Log.d(TAG,"mAuth Id : " + mAuth);
+
                                 user.setId(mAuth.getCurrentUser().getUid()); //this will match the mAuth and Database userID
                                 updateUserInfo(user, mAuth.getCurrentUser());
                             } else {
@@ -120,7 +121,7 @@ View.OnClickListener{
 
     private void updateUserInfo(final User user,final FirebaseUser currentUser) {
         /*TODO: Create a new user - Bubbles Database*/
-
+       // user.setId(currentUser.getUid());
         if(user.getId() != null) {
             mDatabase.child(user.getId())
                     .setValue(user)
@@ -149,7 +150,7 @@ View.OnClickListener{
                         }
                     });
         }else{
-            showMessage("UserID is null");
+            showMessage("UserID is : null  " + currentUser );
         }
 
     }

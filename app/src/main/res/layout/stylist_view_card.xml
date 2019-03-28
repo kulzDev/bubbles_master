@@ -37,7 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Stylist skill"
-           />
+            />
+
+            <TextView
+                android:id="@+id/addressId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stylist skill"
+                />
 
     </LinearLayout>
 

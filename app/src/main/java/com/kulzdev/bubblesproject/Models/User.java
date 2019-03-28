@@ -12,6 +12,7 @@ public class User {
     private String mUserAddress;
     private String id;
     private List<ServicesList> mServices;
+    private Appointment mAppointment;
 
 
 
@@ -93,5 +94,13 @@ public class User {
 
     public void setUserAddress(String mUserAddress) {
         this.mUserAddress = mUserAddress;
+    }
+
+    public Appointment getmAppointment() {
+        return mAppointment;
+    }
+
+    public void setmAppointment(Appointment mAppointment) {
+        this.mAppointment = mAppointment;
     }
 }
