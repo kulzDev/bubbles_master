@@ -24,4 +24,12 @@ public class Services {
     public void setmServiceId(int mServiceId) {
         this.mServiceId = mServiceId;
     }
+
+    @Override
+    public String toString() {
+        return "Services{" +
+                "mServices='" + mServices + '\'' +
+                ", mServiceId=" + mServiceId +
+                '}';
+    }
 }

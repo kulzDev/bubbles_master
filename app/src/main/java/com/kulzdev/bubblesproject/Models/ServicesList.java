@@ -32,4 +32,12 @@ public class ServicesList {
     public void setServiceList(List<String> mServiceList) {
         this.mServiceList = mServiceList;
     }
+
+    @Override
+    public String toString() {
+        return "ServicesList{" +
+                "mServiceCategory='" + mServiceCategory + '\'' +
+                ", mServiceList=" + mServiceList +
+                '}';
+    }
 }

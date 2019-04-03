@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.kulzdev.bubblesproject.Models.Appointment;
 import com.kulzdev.bubblesproject.Models.User;
 import com.kulzdev.bubblesproject.R;
 
@@ -21,12 +22,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistListRecyclerAdapter.StylistListView>{
 
     private Context mContext;
-    private ArrayList<User> mUsers;
+    private ArrayList<Appointment> mAppointments;
     private FirebaseAuth mAuth;
 
-    public StylistListRecyclerAdapter(Context mContext,ArrayList<User> users) {
+    public StylistListRecyclerAdapter(Context mContext,ArrayList<Appointment> appointments) {
         this.mContext = mContext;
-        this.mUsers = users;
+        this.mAppointments = appointments;
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -44,7 +45,13 @@ public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistList
     @Override
     public void onBindViewHolder(@NonNull StylistListView clientListView, int position) {
 
-        clientListView.userName.setText(mUsers.get(position).getFullName());
+        clientListView.clientFullName.setText(mAppointments.get(position).getClientName());
+        clientListView.serviceRequested.setText(mAppointments.get(position).getStyleRequested());
+        clientListView.date.setText(mAppointments.get(position).getDate());
+        clientListView.time.setText(mAppointments.get(position).getTime());
+
+
+
         //clientListView.eMail.setText(users.get(position).getEmail());
         //  Picasso.get().load(users.get(position).getProfilePics()).into(clientListView.imageView);
 
@@ -53,14 +60,18 @@ public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistList
 
     @Override
     public int getItemCount() {
-        return mUsers.size();
+        return mAppointments.size();
 
     }
 
     public class StylistListView extends RecyclerView.ViewHolder{
 
         CircleImageView imageView;
-        TextView userName;
+        TextView clientFullName;
+        TextView clientNumber;
+        TextView  serviceRequested;
+        TextView date;
+        TextView time;
         Button confirm_btn;
         Button cancel_btn;
         ImageView btnBack_arrow;
@@ -69,7 +80,12 @@ public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistList
             super(itemView);
 
             imageView = itemView.findViewById(R.id.appointment_user_profileImage);
-            userName = itemView.findViewById(R.id.profile_displayName);
+            clientFullName = itemView.findViewById(R.id.booking_client_name);
+            clientNumber = itemView.findViewById(R.id.booking_client_phonenumber);
+            time = itemView.findViewById(R.id.client_appointmentTime);
+            date = itemView.findViewById(R.id.client_appointmentDate);
+            serviceRequested = itemView.findViewById(R.id.client_serviceRequired);
+
             confirm_btn = itemView.findViewById(R.id.btnStylist_confirm_client);
             cancel_btn = itemView.findViewById(R.id.btnStylist_cancel_client);
             btnBack_arrow = itemView.findViewById(R.id.appointment_back_arrow);

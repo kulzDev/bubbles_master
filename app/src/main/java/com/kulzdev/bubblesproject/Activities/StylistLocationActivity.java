@@ -113,13 +113,9 @@ public class StylistLocationActivity extends AppCompatActivity {
                     mUser.setServices(tmpList);  //hard coded,to be changed later
 
                     showMessage("Hair service selected");
-
                     updateUserInfo();
-
                     updateUI();
                 }
-
-
 
                 mBusinessAddress.getText();
                 Toast.makeText(getApplicationContext(), " " + mBusinessAddress.getText() +" and " + mServiceSeleted.toString(), Toast.LENGTH_LONG).show();

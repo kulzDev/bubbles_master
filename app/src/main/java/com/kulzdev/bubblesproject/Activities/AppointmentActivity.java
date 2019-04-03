@@ -33,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.kulzdev.bubblesproject.Models.Appointment;
+import com.kulzdev.bubblesproject.Models.AppointmentList;
 import com.kulzdev.bubblesproject.Models.Services;
 import com.kulzdev.bubblesproject.Models.ServicesList;
 import com.kulzdev.bubblesproject.Models.Stylist;
@@ -41,6 +42,7 @@ import com.kulzdev.bubblesproject.R;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -59,7 +61,8 @@ public class AppointmentActivity extends AppCompatActivity implements   View.OnC
 
     private ServicesList servicesList = new ServicesList();
 
-    private User mUser;
+    private User mClientUser;
+    private User mStylistUser;
 
 
     private TextView txtclose, txtStylistDisplay;
@@ -90,7 +93,7 @@ public class AppointmentActivity extends AppCompatActivity implements   View.OnC
 
         mClientId = mAuth.getCurrentUser().getUid();
 
-        /* TODO: receiving data from */
+        /* TODO: receiving data from  RecyclerViewAdapter*/
 
         Intent i =  getIntent();
          mIntentData = getIntent().getExtras().getStringArray("StylistData");   // = i.getExtras().getString("StylistData");
@@ -99,11 +102,17 @@ public class AppointmentActivity extends AppCompatActivity implements   View.OnC
         mRandom= new Random(10000);
         mRandom.nextDouble();
 
-        Query findUser = FirebaseDatabase.getInstance().getReference("users")
+        Query findCurrentUser = FirebaseDatabase.getInstance().getReference("users")
                 .orderByChild("id")
                 .equalTo(mAuth.getCurrentUser().getUid());
 
-        findUser.addValueEventListener(findUsersByID);
+        findCurrentUser.addValueEventListener(findClientUsersByID);
+
+        Query findStylistUser = FirebaseDatabase.getInstance().getReference("users")
+                .orderByChild("id")
+                .equalTo(mIntentData[0]);
+
+        findStylistUser.addValueEventListener(findStylistUsersByID);
 
 
         txtStylistDisplay.setText(mIntentData[1]);
@@ -130,12 +139,6 @@ public class AppointmentActivity extends AppCompatActivity implements   View.OnC
         layout1.clone(constraintLayout);
         myDialog = new Dialog(this);
 
-
-
-
-
-
-
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,43 +149,95 @@ public class AppointmentActivity extends AppCompatActivity implements   View.OnC
                 int year = datePicker.getYear();
 
                 mAppointment = new Appointment(
-                        mClientId +""+mRandom.nextDouble(),
-                        mClientId, mIntentData[0],day + " " + month + " " + year,hour + ":"+minutes
+                        mClientId +""+mRandom.nextInt(),
+                        mClientId, mIntentData[0], //stylistId
+                        mClientUser.getFullName(),
+                        mStylistUser.getFullName(),
+                        hour + ":"+minutes,
+                        day + " " + month + " " + year
                 );
 
-                mUser.setmAppointment(mAppointment);
-                updateUserInfo(mUser);
+                mAppointment.setStyleRequested(mIntentData[3]);
+
+    /*            List<Appointment> appListTemp = new ArrayList<>();
+                appListTemp.add(mAppointment);
+
+                AppointmentList appList = new AppointmentList(appListTemp);
+
+                List<AppointmentList> appointmentList = new ArrayList<>();
 
 
-           /*     Toast.makeText(getApplicationContext(),"Appointment set : "+ hour + ":"+minutes + "\n"
-                        + "On :" + day + " " + month + " " + year + "\n"+
-                        "With : " + user.getFullName()*//*get stylist name*//* + "\n" +
-                        "For :" + servicesList.getServiceCategory() *//*get service type*//*+ "\n"+
-                        "Location : " + user.getUserAddress(),Toast.LENGTH_LONG).show();*/
+                appointmentList.add(appList);
+
+
+                *//* TODO: GETTING ALLAPPOINTMENT ENTRIES IN THE LIST*//*
+
+                if(mClientUser.getAppointment() != null){
+
+                    appointmentList = mClientUser.getAppointment();
 
 
 
+
+                    Toast.makeText(getApplicationContext(),"there are clients",Toast.LENGTH_LONG).show();
+                }*/
+
+            /*    if(mStylistUser.getAppointment() != null){
+                    for(Appointment appointment: mStylistUser.getAppointment()){
+                        appointmentList.add(appointment);
+                    }
+
+                    Toast.makeText(getApplicationContext(),"there are stylist",Toast.LENGTH_LONG).show();
+                }
+*/
+                //final AppointmentList appointmentList = new AppointmentList(mAppointment);
+
+
+                mClientUser.setAppointment(mAppointment);
+                mStylistUser.setAppointment(mAppointment);
+
+
+                Log.d("Client", mClientUser.toString());
+                Log.d("Client", mStylistUser.toString());
+
+
+                updateUserInfo(mStylistUser);
+                updateUserInfo(mClientUser);
 
             }
         });
 
-
-
-
-
-
-
-
     }
 
 
-    ValueEventListener findUsersByID = new ValueEventListener() {
+    ValueEventListener findClientUsersByID = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             if(dataSnapshot.exists()){
 
                 for(DataSnapshot dataSnap : dataSnapshot.getChildren()){
-                    mUser = dataSnap.getValue(User.class);
+                    mClientUser = dataSnap.getValue(User.class);
+                }
+
+            }else{
+
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };
+
+
+    ValueEventListener findStylistUsersByID = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            if(dataSnapshot.exists()){
+
+                for(DataSnapshot dataSnap : dataSnapshot.getChildren()){
+                    mStylistUser = dataSnap.getValue(User.class);
                 }
 
             }else{
@@ -206,31 +261,24 @@ public class AppointmentActivity extends AppCompatActivity implements   View.OnC
         }
     }
 
-
-
-
     private void updateUserInfo(final User user) {
         /*TODO: Create a new user - Bubbles Database*/
         // user.setId(currentUser.getUid());
         if(user.getId() != null) {
-            mDatabase.child(user.getId())
-                    .setValue(user)
+            mDatabase.child(user.getId()).child("Appointments").child(user.getAppointment().getId())
+                    .setValue(user.getAppointment())
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-
                                 showMessage("Appointment Booked");
                             }
-
                         }
                     });
         }else{
 
         }
-
     }
-
 
     private void showMessage(String message) {
         /*TODO: Generating Toast Messages*/

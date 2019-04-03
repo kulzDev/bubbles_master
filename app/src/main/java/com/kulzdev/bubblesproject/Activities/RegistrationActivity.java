@@ -136,7 +136,7 @@ View.OnClickListener{
                                     Intent i = new Intent(RegistrationActivity.this, StylistLocationActivity.class);
                                     startActivity(i);
                                 } else {
-                                    showMessage("Not a stylist");
+                                    //showMessage("Not a stylist");
                                     Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
                                     startActivity(i);
                                 }

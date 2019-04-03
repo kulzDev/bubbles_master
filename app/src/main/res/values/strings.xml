@@ -38,7 +38,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_stylist_home">StylistHomeActivity</string>
+    <string name="title_activity_stylist_home">Appointments</string>
 
     <string name="service_prompt">Choose a service</string>
 

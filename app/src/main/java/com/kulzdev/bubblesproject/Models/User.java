@@ -12,7 +12,9 @@ public class User {
     private String mUserAddress;
     private String id;
     private List<ServicesList> mServices;
+    /*TODO: change appointment to a list of appointment*/
     private Appointment mAppointment;
+
 
 
 
@@ -24,6 +26,7 @@ public class User {
         this.mFullName = mFullName;
         this.mProfileImage = mProfileImage;
         this.mServices = mServices;
+
     }
 
     public User(String mFullName, String mEmail, String mClientType) {
@@ -32,6 +35,8 @@ public class User {
         this.mUserType = mClientType;
 
     }
+
+
 
     public String getFullName() {
         return mFullName;
@@ -96,11 +101,27 @@ public class User {
         this.mUserAddress = mUserAddress;
     }
 
-    public Appointment getmAppointment() {
+    public Appointment getAppointment() {
         return mAppointment;
     }
 
-    public void setmAppointment(Appointment mAppointment) {
+    public void setAppointment(Appointment mAppointment) {
         this.mAppointment = mAppointment;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "mFullName='" + mFullName + '\'' +
+                ", mEmail='" + mEmail + '\'' +
+                ", mUserType='" + mUserType + '\'' +
+                ", mPhoneNumber='" + mPhoneNumber + '\'' +
+                ", mProfileImage=" + mProfileImage +
+                ", mUserAddress='" + mUserAddress + '\'' +
+                ", id='" + id + '\'' +
+                ", mServices=" + mServices +
+                ", mAppointment=" + mAppointment +
+                '}';
     }
 }

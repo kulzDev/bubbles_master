@@ -1,5 +1,6 @@
 package com.kulzdev.bubblesproject.Activities;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -33,6 +35,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.kulzdev.bubblesproject.Adapters.ClientListRecyclerAdapter;
 import com.kulzdev.bubblesproject.Adapters.StylistListRecyclerAdapter;
+import com.kulzdev.bubblesproject.Models.Appointment;
 import com.kulzdev.bubblesproject.Models.User;
 import com.kulzdev.bubblesproject.R;
 
@@ -45,15 +48,16 @@ public class StylistHomeActivity extends AppCompatActivity
 
     private TextView mTextMessage,mDisplayName;
     private FirebaseAuth mAuth;
-    private User findUser;
+    private User findUser, mUser;
+    private Appointment mAppointment;
     private FirebaseUser currentUser;
     private CircleImageView mUserPhoto;
-    private Query dbUser;
+    private Query dbUser, mQuaryAppointment;
     private CardView mCardViewService;
     private ImageView nav_profile_image;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase, mDBAppointment;
     RecyclerView recyclerView;
-    ArrayList<User> list;
+    ArrayList<Appointment> list;
     StylistListRecyclerAdapter adapter; //this works here for now
 
 
@@ -71,14 +75,20 @@ public class StylistHomeActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.stylist_appointment_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        list = new ArrayList<User>();
+        list = new ArrayList<Appointment>();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        //mDBAppointment = FirebaseDatabase.getInstance().getReference().child("users").child("services");
 
 
         dbUser = mDatabase
                 .orderByChild("id")
                 .equalTo(mAuth.getCurrentUser().getUid());
+
+       mQuaryAppointment = mDatabase
+                .orderByChild("Appointments");
+
+
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -91,8 +101,9 @@ public class StylistHomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
         dbUser.addValueEventListener(findUsersByID);
-        mDatabase.addValueEventListener(findAllUsersByID);
+        mQuaryAppointment.addValueEventListener(findAllUsersByID);
 
 
     }
@@ -110,14 +121,35 @@ public class StylistHomeActivity extends AppCompatActivity
     ValueEventListener findAllUsersByID  = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
 
-                User user = dataSnapshot1.getValue(User.class);
-                list.add(user);
+            if(dataSnapshot.exists()){
+                for(DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+
+
+
+                   // mAppointment = dataSnapshot1.getValue(Appointment.class);
+                    mUser = dataSnapshot1.getValue(User.class);
+
+                    Log.d("TAG","Found A booking appointment  " + mUser);
+                    Log.d("TAG","USers  " + mUser.getServices());
+
+                    //Toast.makeText(getApplicationContext(), ""+mUser, Toast.LENGTH_LONG).show();
+
+             /*   if(user.getAppointment().getmtylistId().equals(mAuth.getCurrentUser().getUid())){
+
+                    Toast.makeText(getApplicationContext(), "Found A booking appointment" + user.getAppointment().getmtylistId(), Toast.LENGTH_LONG).show();
+
+                }*/
+                    //list.add(user.getAppointment());
+                }
+
+
+            }else {
+
+                Log.d("TAG", "No snap shot");
             }
-
-            adapter = new StylistListRecyclerAdapter(StylistHomeActivity.this, list);
-            recyclerView.setAdapter(adapter);
+            //adapter = new StylistListRecyclerAdapter(StylistHomeActivity.this, list);
+            //recyclerView.setAdapter(adapter);
         }
 
         @Override
