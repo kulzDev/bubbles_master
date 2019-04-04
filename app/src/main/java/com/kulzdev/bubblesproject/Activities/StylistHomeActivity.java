@@ -57,7 +57,8 @@ public class StylistHomeActivity extends AppCompatActivity
     private ImageView nav_profile_image;
     private DatabaseReference mDatabase, mDBAppointment;
     RecyclerView recyclerView;
-    ArrayList<Appointment> list;
+    ArrayList<Appointment> mAppointmentList;
+    ArrayList<User> users;
     StylistListRecyclerAdapter adapter; //this works here for now
 
 
@@ -75,18 +76,24 @@ public class StylistHomeActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.stylist_appointment_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        list = new ArrayList<Appointment>();
+      //  list = new ArrayList<Appointment>();
+
+        users = new ArrayList<User>();
+        mAppointmentList = new ArrayList<Appointment>();
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        //mDBAppointment = FirebaseDatabase.getInstance().getReference().child("users").child("services");
+        mDBAppointment = FirebaseDatabase.getInstance().getReference().child("users").child(mAuth.getCurrentUser().getUid()).child("Appointments");
 
 
         dbUser = mDatabase
                 .orderByChild("id")
                 .equalTo(mAuth.getCurrentUser().getUid());
 
-       mQuaryAppointment = mDatabase
-                .orderByChild("Appointments");
+       mQuaryAppointment = mDBAppointment
+                .orderByChild("id");
+
+      /*  mQuaryAppointment = mDBAppointment
+                .orderByChild("id");*/
 
 
 
@@ -103,7 +110,12 @@ public class StylistHomeActivity extends AppCompatActivity
         navigationView.setItemIconTintList(null);
 
         dbUser.addValueEventListener(findUsersByID);
-        mQuaryAppointment.addValueEventListener(findAllUsersByID);
+        //mQuaryAppointment.addValueEventListener(findAllUsersByID);
+
+        Log.d("TAG","DB Appointment reference : " + mDBAppointment.toString());
+
+        mQuaryAppointment.addValueEventListener(findAppointment);
+
 
 
     }
@@ -127,11 +139,14 @@ public class StylistHomeActivity extends AppCompatActivity
 
 
 
-                   // mAppointment = dataSnapshot1.getValue(Appointment.class);
-                    mUser = dataSnapshot1.getValue(User.class);
 
-                    Log.d("TAG","Found A booking appointment  " + mUser);
-                    Log.d("TAG","USers  " + mUser.getServices());
+                   // mAppointment = dataSnapshot1.getValue(Appointment.class);
+                    User user = dataSnapshot1.getValue(User.class);
+                    //if(user.getUserType().equals("Client"))
+                    Toast.makeText(getApplicationContext(),"Do something", Toast.LENGTH_SHORT).show();
+
+                  //  Log.d("TAG","Found A booking appointment  " + user);
+                   // Log.d("TAG","USers  " + mUser.getServices());
 
                     //Toast.makeText(getApplicationContext(), ""+mUser, Toast.LENGTH_LONG).show();
 
@@ -140,7 +155,11 @@ public class StylistHomeActivity extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "Found A booking appointment" + user.getAppointment().getmtylistId(), Toast.LENGTH_LONG).show();
 
                 }*/
-                    //list.add(user.getAppointment());
+                   // list.add(mUser.getAppointment());
+                    users.add(user);
+
+                    Log.d("TAG","USers  " + user);
+
                 }
 
 
@@ -148,13 +167,41 @@ public class StylistHomeActivity extends AppCompatActivity
 
                 Log.d("TAG", "No snap shot");
             }
-            //adapter = new StylistListRecyclerAdapter(StylistHomeActivity.this, list);
-            //recyclerView.setAdapter(adapter);
+           // adapter = new StylistListRecyclerAdapter(StylistHomeActivity.this /*list*/, users);
+           // recyclerView.setAdapter(adapter);
         }
 
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
             Toast.makeText(StylistHomeActivity.this, "Oops... Something went wrong", Toast.LENGTH_LONG).show();
+
+        }
+    };
+
+    ValueEventListener findAppointment = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            if(dataSnapshot.exists()){
+
+                for(DataSnapshot dataSnap : dataSnapshot.getChildren()){
+                    Log.d("TAG2","APPOINTMENTS  " + dataSnap.getValue(Appointment.class));
+
+                    mAppointmentList.add(dataSnap.getValue(Appointment.class));
+                }
+
+                Log.d("TAG2", " snap shot exits");
+            }else{
+                showMessage("User doesn't exits, please register");
+                Log.d("TAG2", "No snap shot");
+            }
+
+
+            adapter = new StylistListRecyclerAdapter(StylistHomeActivity.this /*list*/, mAppointmentList);
+            recyclerView.setAdapter(adapter);
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
 
         }
     };

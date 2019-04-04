@@ -24,10 +24,25 @@ public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistList
     private Context mContext;
     private ArrayList<Appointment> mAppointments;
     private FirebaseAuth mAuth;
+    private ArrayList<User> mUsers;
 
-    public StylistListRecyclerAdapter(Context mContext,ArrayList<Appointment> appointments) {
+
+//    public StylistListRecyclerAdapter(Context mContext,/*ArrayList<Appointment> appointments,*/ ArrayList<User> mUsers) {
+//        this.mContext = mContext;
+//      //  this.mAppointments = appointments;
+//        this.mUsers = mUsers;
+//        mAuth = FirebaseAuth.getInstance();
+//    }
+
+  /*  public StylistListRecyclerAdapter(Context mContext, ArrayList<User> mUsers) {
         this.mContext = mContext;
-        this.mAppointments = appointments;
+        this.mUsers = mUsers;
+        mAuth = FirebaseAuth.getInstance();
+    }*/
+
+    public StylistListRecyclerAdapter(Context mContext, ArrayList<Appointment> mAppoiment) {
+        this.mContext = mContext;
+        this.mAppointments = mAppoiment;
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -36,7 +51,7 @@ public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistList
     public StylistListView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.appointment_user_list, viewGroup, false);
+        View view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_list_item, viewGroup, false);
 
 
         return new StylistListView(view);
@@ -47,8 +62,10 @@ public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistList
 
         clientListView.clientFullName.setText(mAppointments.get(position).getClientName());
         clientListView.serviceRequested.setText(mAppointments.get(position).getStyleRequested());
-        clientListView.date.setText(mAppointments.get(position).getDate());
+       clientListView.date.setText(mAppointments.get(position).getDate());
         clientListView.time.setText(mAppointments.get(position).getTime());
+        //clientListView.clientFullName.setText(mUsers.get(position).getFullName());
+        //clientListView.clientFullName.setText(mUsers.get(position).getFullName());
 
 
 
@@ -60,7 +77,9 @@ public class StylistListRecyclerAdapter extends RecyclerView.Adapter<StylistList
 
     @Override
     public int getItemCount() {
+        //return mAppointments.size();
         return mAppointments.size();
+
 
     }
 

@@ -201,6 +201,8 @@ public class AppointmentActivity extends AppCompatActivity implements   View.OnC
                 Log.d("Client", mStylistUser.toString());
 
 
+
+
                 updateUserInfo(mStylistUser);
                 updateUserInfo(mClientUser);
 

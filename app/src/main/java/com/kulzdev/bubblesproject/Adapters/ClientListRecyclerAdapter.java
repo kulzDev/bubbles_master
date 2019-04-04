@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.kulzdev.bubblesproject.Models.User;
+import com.kulzdev.bubblesproject.Models.Appointment;
 import com.kulzdev.bubblesproject.R;
 
 import java.util.ArrayList;
@@ -21,46 +21,49 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ClientListRecyclerAdapter extends RecyclerView.Adapter<ClientListRecyclerAdapter.ClientListView>{
 
     private Context mContext;
-    private ArrayList<User> mUsers;
+    private ArrayList<Appointment> mAppointments;
     private FirebaseAuth mAuth;
 
-    public ClientListRecyclerAdapter(Context mContext,ArrayList<User> users) {
+    public ClientListRecyclerAdapter(Context mContext, ArrayList<Appointment> mAppointments) {
         this.mContext = mContext;
-        this.mUsers = users;
-        mAuth = FirebaseAuth.getInstance();
+        this.mAppointments = mAppointments;
+        mAuth  = FirebaseAuth.getInstance();
     }
 
     @NonNull
     @Override
     public ClientListView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
+
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        View view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.users_list_item, viewGroup, false);
-
-
+        View view = layoutInflater.from(viewGroup.getContext()).inflate(R.layout.appointment_user_list, viewGroup, false);
         return new ClientListView(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClientListView clientListView, int position) {
-
-        clientListView.userName.setText(mUsers.get(position).getFullName());
-        //clientListView.eMail.setText(users.get(position).getEmail());
-      //  Picasso.get().load(users.get(position).getProfilePics()).into(clientListView.imageView);
+    public void onBindViewHolder(@NonNull ClientListView clientListView, int i) {
+        clientListView.clientFullName.setText(mAppointments.get(i).getClientName());
+        clientListView.serviceRequested.setText(mAppointments.get(i).getStyleRequested());
+//        clientListView.date.setText(mAppointments.get(i).getDate());
+//        clientListView.time.setText(mAppointments.get(i).getTime());
 
 
     }
 
     @Override
     public int getItemCount() {
-       return mUsers.size();
-
+        return mAppointments.size();
     }
 
     public class ClientListView extends RecyclerView.ViewHolder{
 
+
         CircleImageView imageView;
-        TextView userName;
+        TextView clientFullName;
+        TextView clientNumber;
+        TextView  serviceRequested;
+        TextView date;
+        TextView time;
         Button confirm_btn;
         Button cancel_btn;
         ImageView btnBack_arrow;
@@ -69,13 +72,16 @@ public class ClientListRecyclerAdapter extends RecyclerView.Adapter<ClientListRe
             super(itemView);
 
             imageView = itemView.findViewById(R.id.appointment_user_profileImage);
-            userName = itemView.findViewById(R.id.profile_displayName);
+            clientFullName = itemView.findViewById(R.id.booking_client_name);
+            //clientNumber = itemView.findViewById(R.id.booking_stylist_phoneNumber);
+            time = itemView.findViewById(R.id.stylist_appointmentTime);
+            date = itemView.findViewById(R.id.stylist_appointmentDate);
+            serviceRequested = itemView.findViewById(R.id.stylist_serviceRequired);
+
             confirm_btn = itemView.findViewById(R.id.btnStylist_confirm_client);
             cancel_btn = itemView.findViewById(R.id.btnStylist_cancel_client);
             btnBack_arrow = itemView.findViewById(R.id.appointment_back_arrow);
-         //   eMail = itemView.findViewById(R.id.Email);
 
         }
     }
-
 }

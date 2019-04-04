@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.StylistProfileActivity"></activity>
+        <activity android:name=".Activities.StylistProfileActivity" />
         <activity
             android:name=".Activities.StylistHomeActivity"
             android:label="@string/title_activity_stylist_home"
@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.RegistrationActivity" />
         <activity android:name=".Activities.StylistLocationActivity" />
-        <activity android:name=".Activities.AppointmentActivity" /> 
+        <activity android:name=".Activities.AppointmentActivity" />
         <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
